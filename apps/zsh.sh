@@ -3,7 +3,7 @@ set -e
 set -o pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-source "$ROOT_DIR/utils/utils.sh"
+source "$ROOT_DIR/utils/safe_symlink.sh"
 
 install_and_setup_zsh(){
     sudo apt install zsh -y 
