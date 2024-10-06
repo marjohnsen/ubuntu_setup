@@ -2,13 +2,11 @@
 set -e
 set -o pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-source "$ROOT_DIR/utils/utils.sh"
+dependencies=("packages")
 
 install_i3() {
     sudo apt install -y picom compton imagemagick scrot i3-wm polybar pavucontrol
 }
-
 
 install_rofi_themes(){
     git clone --depth=1 https://github.com/adi1090x/rofi.git
@@ -27,11 +25,12 @@ symlink_configs() {
     mkdir -p "$HOME/.config/i3"
     mkdir -p "$HOME/.config/polybar"
     mkdir -p "$HOME/.config/picom"
+
     safe_symlink "$ROOT_DIR/utils/i3_lock_screen.sh" "$HOME/.config/i3/i3_lock_screen.sh"
-    safe_symlink "$ROOT_DIR/configs/i3_polybar_config" "$HOME/.config/polybar/config.ini"
-    safe_symlink "$ROOT_DIR/configs/i3_config" "$HOME/.config/i3/config"
-    safe_symlink "$ROOT_DIR/configs/dmrc" "$HOME/.dmrc"
-    safe_symlink "$ROOT_DIR/configs/picom.conf" "$HOME/.config/picom/picom.conf"
+    safe_symlink "$ROOT_DIR/configs/i3/polybar" "$HOME/.config/polybar/config.ini"
+    safe_symlink "$ROOT_DIR/configs/i3/config" "$HOME/.config/i3/config"
+    safe_symlink "$ROOT_DIR/configs/i3/dmrc" "$HOME/.dmrc"
+    safe_symlink "$ROOT_DIR/configs/i3/picom" "$HOME/.config/picom/picom.conf"
 }
 
 main() {
@@ -40,5 +39,8 @@ main() {
     symlink_configs
 }
 
-main "$@"
-
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+   ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+   source "$ROOT_DIR/utils/safe_symlink.sh"
+   main "$@"
+fi

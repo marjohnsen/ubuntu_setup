@@ -27,9 +27,6 @@ kitty +kitten ssh
 # Scrollback memory
 scrollback_lines 1000
 
-# advance 
-term xterm-kitty
-
 # terminal bell
 enable_audio_bell no
 
