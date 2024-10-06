@@ -19,9 +19,23 @@ install_and_setup_ohmyzsh(){
     safe_symlink "$ROOT_DIR/configs/zshrc" "$HOME/.zshrc"
 }
 
+install_plugins(){
+    sudo apt install bat
+
+    local plugins_dir=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
+
+    rm -rf "$plugins_dir" && mkdir -p "$plugins_dir"
+
+    git clone https://github.com/zsh-users/zsh-autosuggestions \
+	    "$plugins_dir/zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+	    "$plugins_dir/zsh-syntax-highlighting"
+    git clone https://github.com/fdellwing/zsh-bat.git \
+	    "$plugins_dir/zsh-bat"
+}
+
 install_and_setup_p10k(){
     local p10k_dir=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-	
 
     if [ -d "$p10k_dir" ]; then
         rm -rf "$p10k_dir"
@@ -36,6 +50,7 @@ install_and_setup_p10k(){
 main(){
     install_and_setup_zsh 
     install_and_setup_ohmyzsh
+    install_plugins
     install_and_setup_p10k
 }
 
