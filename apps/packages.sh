@@ -2,31 +2,31 @@
 set -e
 set -o pipefail
 
-apt_install(){
+apt_install() {
   sudo apt update && sudo apt upgrade
-  sudo apt install curl git 
+  sudo apt install curl git nodejs npm
 }
 
-install_fonts(){
+install_fonts() {
   font_url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
   font_name="JetBrainsMono"
   font_dir="/usr/local/share/fonts"
-  
+
   sudo mkdir -p "$font_dir"
   wget -q --show-progress "$font_url" -O "$font_name.tar.xz"
   sudo tar -xf "$font_name.tar.xz" -C "$font_dir"
-  sudo fc-cache -fv > /dev/null
+  sudo fc-cache -fv >/dev/null
   rm "$font_name.tar.xz"
-  
-  if fc-list | grep -i "JetBrainsMono" > /dev/null; then
-      echo "$font_name Nerd Font installed successfully!"
+
+  if fc-list | grep -i "JetBrainsMono" >/dev/null; then
+    echo "$font_name Nerd Font installed successfully!"
   else
-      echo "Installation failed!"
-      exit 1
+    echo "Installation failed!"
+    exit 1
   fi
 }
 
-main(){
+main() {
   apt_install
   install_fonts
 }

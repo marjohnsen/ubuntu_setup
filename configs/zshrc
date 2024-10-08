@@ -26,7 +26,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# Neovim
+# Nvim
 export PATH="$PATH:/opt/nvim/"
 
 # Alias
