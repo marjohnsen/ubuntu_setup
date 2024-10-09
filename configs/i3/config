@@ -10,6 +10,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id killall -q polybar; polybar
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec_always --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.jpg
 
 # Volume controls
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -117,7 +118,7 @@ set $i3lockwall $HOME/.config/i3/i3_lock_screen.sh
 bindsym $mod+Ctrl+Shift+l exec --no-startup-id $i3lockwall
 
 # Window borders and colors
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 0
 
 client.focused          #FABD2F #FABD2F #FABD2F #FABD2F 
 client.unfocused        #83A598 #83A598 #83A598 #83A598 
@@ -125,7 +126,6 @@ client.urgent           #FB4934 #FB4934 #FB4934 #FB4934
 client.focused_inactive #928374 #928374 #928374 #928374
 
 # Gaps
-gaps inner 8 
-gaps bottom -8
-gaps left -8
-gaps right -8
+gaps inner 10
+gaps top -1
+
