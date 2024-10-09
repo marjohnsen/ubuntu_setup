@@ -5,7 +5,7 @@ set -o pipefail
 dependencies=("packages")
 
 install_i3() {
-  sudo apt install -y picom compton imagemagick scrot i3-wm polybar pavucontrol
+  sudo apt install -y picom compton imagemagick scrot i3-wm polybar pavucontrol feh
 }
 
 install_rofi_themes() {
@@ -31,6 +31,7 @@ symlink_configs() {
   safe_symlink "$ROOT_DIR/configs/i3/config" "$HOME/.config/i3/config"
   safe_symlink "$ROOT_DIR/configs/i3/dmrc" "$HOME/.dmrc"
   safe_symlink "$ROOT_DIR/configs/i3/picom" "$HOME/.config/picom/picom.conf"
+  safe_symlink "$ROOT_DIR/configs/i3/wallpaper.jpg" "$HOME/.config/i3/wallpaper.jpg"
 }
 
 main() {
