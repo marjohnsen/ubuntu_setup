@@ -104,6 +104,8 @@ ramp-signal-2-foreground = ${colors.primary}
 ramp-signal-3-foreground = ${colors.primary}
 ramp-signal-4-foreground = ${colors.primary}
 
+click-left = ./$HOME/.config/rofi/wifi-menu/rofi-wifi-menu.sh
+click-right = ./$HOME/.config/rofi/wifi-menu/rofi-wifi-menu.sh
 
 [module/battery]
 type = internal/battery

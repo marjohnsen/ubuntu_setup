@@ -21,12 +21,19 @@ install_rofi_themes() {
   sed -i 's|/colors/.*\.rasi|/colors/gruvbox.rasi|' "$HOME/.config/rofi/powermenu/type-1/shared/colors.rasi"
 }
 
+install_wifi_menu() {
+  rm -rf "$HOME/.config/rofi/wifi-menu"
+  git clone https://codeberg.org/vlfldr/rofi-wifi-menu.git "$HOME/.config/rofi/wifi-menu"
+  chmod +x "$HOME/.config/rofi/wifi-menu/rofi-wifi-menu.sh"
+}
+
 symlink_configs() {
   mkdir -p "$HOME/.config/i3"
   mkdir -p "$HOME/.config/polybar"
   mkdir -p "$HOME/.config/picom"
 
   safe_symlink "$ROOT_DIR/utils/i3_lock_screen.sh" "$HOME/.config/i3/i3_lock_screen.sh"
+  safe_symlink "$ROOT_DIR/utils/set_gaps_as_percent.sh" "$HOME/.config/i3/set_gaps_as_percent.sh"
   safe_symlink "$ROOT_DIR/configs/i3/polybar" "$HOME/.config/polybar/config.ini"
   safe_symlink "$ROOT_DIR/configs/i3/config" "$HOME/.config/i3/config"
   safe_symlink "$ROOT_DIR/configs/i3/dmrc" "$HOME/.dmrc"
@@ -37,6 +44,7 @@ symlink_configs() {
 main() {
   install_i3
   install_rofi_themes
+  install_wifi_menu
   symlink_configs
 }
 

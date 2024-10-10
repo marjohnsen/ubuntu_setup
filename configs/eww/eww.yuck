@@ -1,0 +1,14 @@
+(defwindow bar
+           :monitor 0
+           :stacking "bg"
+           :focusable true
+           :wm-ignore true 
+           :geometry (geometry :x "0.45%"
+                               :y "0"
+                               :width "2%"
+                               :height "97.6%"
+                               :anchor "center left")
+           :reserve (struts :side "left" :distance "50px")
+           :windowtype "normal"
+  "a")
+

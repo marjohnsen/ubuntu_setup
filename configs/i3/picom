@@ -15,16 +15,16 @@ shadow-radius = 17;
 
 shadow-opacity = .9;
 
-shadow-offset-x = -6;
-shadow-offset-y = -6;
+shadow-offset-x = -8;
+shadow-offset-y = -8;
 
 #################################
 #           Fading              #
 #################################
 fading = true;
 
-fade-in-step = 0.055;
-fade-out-step = 0.055;
+fade-in-step = 0.035;
+fade-out-step = 0.035;
 
 #################################
 #   Transparency / Opacity      #
