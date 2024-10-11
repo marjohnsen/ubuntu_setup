@@ -1,8 +1,7 @@
 #!/bin/bash
-set -e
-set -o pipefail
+//python
 
-dependencies=("packages" "python")
+source utils/app_interface.sh
 
 install_dependencies() {
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
@@ -28,7 +27,7 @@ install_neovim() {
 }
 
 setup_lazyvim() {
-  safe_symlink "$ROOT_DIR/configs/nvim" "$HOME/.config/nvim"
+  safe_symlink "$PWD/configs/nvim" "$HOME/.config/nvim"
 }
 
 setup_nvim_pyenv() {
@@ -49,15 +48,7 @@ setup_nvim_pyenv() {
 
 }
 
-main() {
-  install_dependencies
-  install_neovim
-  setup_lazyvim
-  setup_nvim_pyenv
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-  source "$ROOT_DIR/utils/safe_symlink.sh"
-  main "$@"
-fi
+install_dependencies
+install_neovim
+setup_lazyvim
+setup_nvim_pyenv

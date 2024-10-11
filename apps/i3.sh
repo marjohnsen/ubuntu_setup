@@ -1,8 +1,6 @@
 #!/bin/bash
-set -e
-set -o pipefail
 
-dependencies=("packages")
+source utils/app_interface.sh
 
 install_i3() {
   sudo apt install -y picom compton imagemagick scrot i3-wm polybar pavucontrol feh
@@ -32,24 +30,16 @@ symlink_configs() {
   mkdir -p "$HOME/.config/polybar"
   mkdir -p "$HOME/.config/picom"
 
-  safe_symlink "$ROOT_DIR/utils/i3_lock_screen.sh" "$HOME/.config/i3/i3_lock_screen.sh"
-  safe_symlink "$ROOT_DIR/utils/set_gaps_as_percent.sh" "$HOME/.config/i3/set_gaps_as_percent.sh"
-  safe_symlink "$ROOT_DIR/configs/i3/polybar" "$HOME/.config/polybar/config.ini"
-  safe_symlink "$ROOT_DIR/configs/i3/config" "$HOME/.config/i3/config"
-  safe_symlink "$ROOT_DIR/configs/i3/dmrc" "$HOME/.dmrc"
-  safe_symlink "$ROOT_DIR/configs/i3/picom" "$HOME/.config/picom/picom.conf"
-  safe_symlink "$ROOT_DIR/configs/i3/wallpaper.jpg" "$HOME/.config/i3/wallpaper.jpg"
+  safe_symlink "$PWD/utils/i3_lock_screen.sh" "$HOME/.config/i3/i3_lock_screen.sh"
+  safe_symlink "$PWD/utils/set_gaps_as_percent.sh" "$HOME/.config/i3/set_gaps_as_percent.sh"
+  safe_symlink "$PWD/configs/i3/polybar" "$HOME/.config/polybar/config.ini"
+  safe_symlink "$PWD/configs/i3/config" "$HOME/.config/i3/config"
+  safe_symlink "$PWD/configs/i3/dmrc" "$HOME/.dmrc"
+  safe_symlink "$PWD/configs/i3/picom" "$HOME/.config/picom/picom.conf"
+  safe_symlink "$PWD/configs/i3/wallpaper.jpg" "$HOME/.config/i3/wallpaper.jpg"
 }
 
-main() {
-  install_i3
-  install_rofi_themes
-  install_wifi_menu
-  symlink_configs
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-  source "$ROOT_DIR/utils/safe_symlink.sh"
-  main "$@"
-fi
+install_i3
+install_rofi_themes
+install_wifi_menu
+symlink_configs

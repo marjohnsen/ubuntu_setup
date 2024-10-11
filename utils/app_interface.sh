@@ -3,16 +3,6 @@
 set -e
 set -o pipefail
 
-dependencies=("packages")
-
-dependencies() {
-  for dep in "$@"; do
-    dependencies+=("$dep")
-  done
-
-  export dependencies
-}
-
 safe_symlink() {
   local source="$1"
   local dest="$2"
@@ -41,11 +31,5 @@ safe_symlink() {
     done
   else
     ln -s "$source" "$dest"
-  fi
-}
-
-run_app() {
-  if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    app "$@"
   fi
 }

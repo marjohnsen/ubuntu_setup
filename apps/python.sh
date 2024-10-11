@@ -1,8 +1,7 @@
 #!/bin/bash
-set -e
-set -o pipefail
+//zsh
 
-dependencies=("packages" "zsh")
+source utils/app_interface.sh
 
 install_build_dependencies() {
   sudo apt update
@@ -27,12 +26,6 @@ install_latest_stable() {
   pyenv global "$latest_stable"
 }
 
-main() {
-  install_build_dependencies
-  install_pyenv
-  install_latest_stable
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  main "$@"
-fi
+install_build_dependencies
+install_pyenv
+install_latest_stable

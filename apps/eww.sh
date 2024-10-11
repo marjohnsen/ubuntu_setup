@@ -1,3 +1,7 @@
+#!/bin/bash
+
+source utils/app_interface.sh
+
 install_rustup() {
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 }
@@ -23,8 +27,4 @@ build() {
   chmod +x ./usr/local/src/eww/target/release/eww
   sudo ln -s /usr/local/src/eww/target/release/eww /usr/local/bin/eww
   mkdir -p "$HOME/.config/eww"
-}
-
-configure() {
-
 }

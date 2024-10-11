@@ -1,8 +1,6 @@
 #!/bin/bash
-set -e
-set -o pipefail
 
-dependencies=("packages")
+source utils/app_interface.sh
 
 install_kitty() {
   sudo apt install kitty -y
@@ -10,7 +8,7 @@ install_kitty() {
 
 configure_kitty() {
   mkdir -p "$HOME/.config/kitty/"
-  safe_symlink "$ROOT_DIR/configs/kitty" "$HOME/.config/kitty/kitty.conf"
+  safe_symlink "$PWD/configs/kitty" "$HOME/.config/kitty/kitty.conf"
 }
 
 configure_theme() {
@@ -18,14 +16,6 @@ configure_theme() {
   curl https://raw.githubusercontent.com/dexpota/kitty-themes/master/themes/gruvbox_dark.conf >"$HOME/.config/kitty/theme.conf"
 }
 
-main() {
-  install_kitty
-  configure_kitty
-  configure_theme
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-  source "$ROOT_DIR/utils/safe_symlink.sh"
-  main "$@"
-fi
+install_kitty
+configure_kitty
+configure_theme

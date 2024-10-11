@@ -1,6 +1,6 @@
 #!/bin/bash
-set -e
-set -o pipefail
+
+source utils/app_interface.sh
 
 apt_install() {
   sudo apt update && sudo apt upgrade
@@ -26,11 +26,5 @@ install_fonts() {
   fi
 }
 
-main() {
-  apt_install
-  install_fonts
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  main "$@"
-fi
+apt_install
+install_fonts

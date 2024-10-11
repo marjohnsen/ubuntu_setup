@@ -1,8 +1,6 @@
 #!/bin/bash
-set -e
-set -o pipefail
 
-dependencies=("packages")
+source utils/app_interface.sh
 
 install_and_setup_zsh() {
   sudo apt install zsh -y
@@ -16,7 +14,7 @@ install_and_setup_ohmyzsh() {
 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-  safe_symlink "$ROOT_DIR/configs/zshrc" "$HOME/.zshrc"
+  safe_symlink "$PWD/configs/zshrc" "$HOME/.zshrc"
 }
 
 install_plugins() {
@@ -48,15 +46,7 @@ install_and_setup_p10k() {
   read -p "Press [Enter] after completing the p10k configuration to resume setup..."
 }
 
-main() {
-  install_and_setup_zsh
-  install_and_setup_ohmyzsh
-  install_plugins
-  install_and_setup_p10k
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-  source "$ROOT_DIR/utils/safe_symlink.sh"
-  main "$@"
-fi
+install_and_setup_zsh
+install_and_setup_ohmyzsh
+install_plugins
+install_and_setup_p10k
