@@ -30,8 +30,8 @@ symlink_configs() {
   mkdir -p "$HOME/.config/polybar"
   mkdir -p "$HOME/.config/picom"
 
-  safe_symlink "$PWD/utils/i3_lock_screen.sh" "$HOME/.config/i3/i3_lock_screen.sh"
-  safe_symlink "$PWD/utils/set_gaps_as_percent.sh" "$HOME/.config/i3/set_gaps_as_percent.sh"
+  safe_symlink "$PWD/misc/i3_lock_screen.sh" "$HOME/.config/i3/i3_lock_screen.sh"
+  safe_symlink "$PWD/misc/set_gaps_as_percent.sh" "$HOME/.config/i3/set_gaps_as_percent.sh"
   safe_symlink "$PWD/configs/i3/polybar" "$HOME/.config/polybar/config.ini"
   safe_symlink "$PWD/configs/i3/config" "$HOME/.config/i3/config"
   safe_symlink "$PWD/configs/i3/dmrc" "$HOME/.dmrc"
